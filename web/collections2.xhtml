@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>        
+    </h:head>    
+    <h:body>
+        <h:form>
+            <br/>
+            El arreglo usuarios esta 
+            ${((empty usuarioBean.usuarios)?
+              "sin elementos":"con elementos")}
+            <br/>
+            Filtrado de elementos <br/>
+            ${usuarioBean.usuarios.stream().
+              filter(u -> (u.edad > 28)).
+              map(u -> {'Nombre':u.nombre,
+              'Edad':u.edad}).toList()}
+            <br/>
+            Listado       
+            <br/>
+            ${usuarioBean.usuarios.stream().sorted(
+              (u1,u2) -> 
+              (r=u1.nombre.compareTo(u2.nombre))).
+              toList()}
+            <br/>
+            Total edad: ${usuarioBean.usuarios.stream().map(u->u.edad).sum()}
+        </h:form>
+    </h:body>
+</html>
+
